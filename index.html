@@ -19,7 +19,7 @@
 	<body>
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<div class="container">
-				<a class="navbar-brand" href="#"><img src="./assets/image/logo-galleta-small.png" height="40" alt="" /> CooKies</a>
+				<!-- <a class="navbar-brand" href="#"><img src="./assets/image/logo-galleta-small.png" height="40" alt="" /> CooKies</a> -->
 				<button
 					class="navbar-toggler"
 					type="button"
@@ -105,7 +105,7 @@
 		</nav>
 
 		<div class="text-center w-100">
-			<img src="./assets/image/logo-galleta.png" class="mt-4" height="150" alt="" />
+			<!-- <img src="./assets/image/logo-galleta.png" class="mt-4" height="150" alt="" /> -->
 		</div>
 
 		<div class="container px-0 px-md-3">
@@ -114,7 +114,7 @@
 					<tr>
 						<th id="name">Nombre</th>
 						<th id="product">Productos</th>
-						<th id="payment">Deuda</th>
+						<th id="payment">Total</th>
 						<th id="accion"></th>
 					</tr>
 				</thead>
@@ -208,7 +208,7 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-						<button type="button" class="btn btn-danger">Eliminar</button>
+						<button type="button" id="btn-delete-client" class="btn btn-danger">Eliminar</button>
 					</div>
 				</div>
 			</div>
@@ -262,10 +262,10 @@
 		<template id="templete-client">
 			<tr>
 				<td id="name">Alvin</td>
-				<td id="products">Eclair</td>
+				<td id="products" >a</td>
 				<td id="price">$0.87</td>
-				<td class="d-flex justify-content-end">
-					<a href="" class="mx-2" data-toggle="modal" data-target="#editPeople">
+				<td class="d-flex justify-content-end" id="action">
+					<a href="" class="mx-2 btn-edit" data-toggle="modal" data-target="#editPeople">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -284,7 +284,7 @@
 							<rect x="0" y="0" width="24" height="24" fill="rgba(0, 0, 0, 0)" />
 						</svg>
 					</a>
-					<a href="" class="mx-2" data-toggle="modal" data-target="#deletePeople">
+					<a href="" class="mx-2 btn-delete" data-toggle="modal" data-target="#deletePeople">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -317,6 +317,7 @@
 				</button>
 			</li>
 		</template>
+
 		<!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
 		<script
 			src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
