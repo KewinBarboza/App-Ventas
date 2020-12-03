@@ -1,19 +1,19 @@
-const nameClient 			= document.getElementById('namePeople');
-const nameProduct 			= document.getElementById('name-product')
-const priceProduct 			= document.getElementById('price-product')
-const btnSaveClient 		= document.getElementById('btnSavePeople');
-const btnSaveProduct 		= document.getElementById('save-product');
-const btnModalClientes 		= document.getElementById('modal-clientes');
-const btnModalProductos 	= document.getElementById('modal-productos');
-const btnModalDeleteClient 	= document.getElementById('btn-delete-client')
-const listProducts 			= document.getElementById('listProducts');
-const listClient 			= document.getElementById('list-client');
-const listProductsNew 		= document.getElementById('list-product');
+const nameClient = document.getElementById('namePeople');
+const nameProduct = document.getElementById('name-product');
+const priceProduct = document.getElementById('price-product');
+const btnSaveClient = document.getElementById('btnSavePeople');
+const btnSaveProduct = document.getElementById('save-product');
+const btnModalClientes = document.getElementById('modal-clientes');
+const btnModalProductos = document.getElementById('modal-productos');
+const btnModalDeleteClient = document.getElementById('btn-delete-client');
+const listProducts = document.getElementById('listProducts');
+const listClient = document.getElementById('list-client');
+const listProductsNew = document.getElementById('list-product');
 
 // agregar producto a clientes
 let addProducts = [];
 
-// lista de personas 
+// lista de personas
 let clients = [
 	// {
 	// 	id: 1,
@@ -43,9 +43,9 @@ let products = [
 // crear id unico para productos y clientes
 var idCounter = 0;
 function uniqueId(prefix) {
-    var id = ++idCounter + '';
-    return prefix ? prefix + id : id;
-};
+	var id = ++idCounter + '';
+	return prefix ? prefix + id : id;
+}
 
 // agregar producto a los clientes
 function addProductPeople() {
@@ -63,7 +63,6 @@ function addProductPeople() {
 			} else {
 				const a = addProducts.filter((item) => item.id !== parseInt(check.id));
 				addProducts = [...a];
-				console.log(addProducts)
 			}
 		});
 	});
@@ -78,39 +77,39 @@ function saveClient(e) {
 	addProducts = [];
 	listClients();
 	limpiarModal('addPeople');
-	selectDeleteClient()
 }
 
 // eliminar clientes
-function selectDeleteClient(){
-	const btnDeleteClient = document.querySelectorAll('#action .btn-delete')
-	btnDeleteClient.forEach(btn => {
-		btn.addEventListener('click', () =>{
-			deleteClient(btn.id)
-		})
-	})
-} 
+function selectDeleteClient() {
+	const btnDeleteClient = document.querySelectorAll('#action .btn-delete');
+	btnDeleteClient.forEach((btn) => {
+		btn.addEventListener('click', () => {
+			deleteClient(btn.id);
+			console.log(btn.id);
+		});
+	});
+}
 
-function deleteClient(id){
-	console.log(id)
+function deleteClient(id) {
 	btnModalDeleteClient.addEventListener('click', () => {
-		const d = clients.filter(client => client.id !== id )
-		clients = [...d]
+		console.log(id);
+		const d = clients.filter((client) => client.id !== id);
+		clients = [...d];
 		listClient.innerHTML = '';
+		console.log(clients);
+		$('#deletePeople').modal('hide');
 		listClients();
-	})
-
-	console.log(clients)
+	});
 }
 
 // guardar productos
 function saveProduct(e) {
-	e.preventDefault()
-	listProductsNew.innerHTML = ''
-	const addProduct = {id: parseInt(uniqueId()), name:nameProduct.value, price: parseInt(priceProduct.value), state: false}
-	products.push(addProduct)
-	nameProduct.value = ''
-	priceProduct.value = ''
+	e.preventDefault();
+	listProductsNew.innerHTML = '';
+	const addProduct = { id: parseInt(uniqueId()), name: nameProduct.value, price: parseInt(priceProduct.value), state: false };
+	products.push(addProduct);
+	nameProduct.value = '';
+	priceProduct.value = '';
 	listProductNew();
 	deleteProduct();
 }
@@ -145,19 +144,18 @@ const listClients = () => {
 
 	for (const client of clients) {
 		templete.getElementById('name').textContent = client.name;
-		templete.querySelector('.btn-delete').setAttribute('id', client.id)
-		const products = templete.getElementById('products')
-		const price = templete.getElementById('price')
-		
-		products.innerHTML = ''
-		price.innerHTML = ''
+		templete.querySelector('.btn-delete').setAttribute('id', client.id);
+		const productsTemplete = templete.getElementById('products');
+		const price = templete.getElementById('price');
+
+		productsTemplete.innerHTML = '';
+		price.innerHTML = '';
 		let total = 0;
 
 		client.products.map((product) => {
-			total += product.price
-			console.log(total) 
-			products.innerHTML += `<span class="badge badge-light mx-1"> ${product.name} - ${product.price} Bs  </span>`;
-			templete.getElementById('price').textContent = `${total} Bs`
+			total += product.price;
+			productsTemplete.innerHTML += `<span class="badge badge-light mx-1"> ${product.name} - ${product.price} Bs  </span>`;
+			templete.getElementById('price').textContent = `${total} Bs`;
 		});
 
 		const clone = templete.cloneNode(true);
@@ -165,64 +163,61 @@ const listClients = () => {
 	}
 
 	listClient.appendChild(fragment);
+	selectDeleteClient();
 };
 
 // listar productos nuevos
-const listProductNew = () =>{
-	const templete = document.getElementById('templete-list-product').content
-	const fragment = document.createDocumentFragment()
+const listProductNew = () => {
+	const templete = document.getElementById('templete-list-product').content;
+	const fragment = document.createDocumentFragment();
 
-	products.map(product => {
-		templete.querySelector('#item-products p').textContent = product.name
-		templete.querySelector('#item-products span').textContent = product.price
-		templete.querySelector('button').setAttribute('id', product.id)
+	products.map((product) => {
+		templete.querySelector('#item-products p').textContent = product.name;
+		templete.querySelector('#item-products span').textContent = product.price;
+		templete.querySelector('button').setAttribute('id', product.id);
 
-		const clone = templete.cloneNode(true)
-		fragment.appendChild(clone)
-	})
+		const clone = templete.cloneNode(true);
+		fragment.appendChild(clone);
+	});
 
-	listProductsNew.appendChild(fragment)
-}
+	listProductsNew.appendChild(fragment);
+};
 
 // eliminar producto
 const deleteProduct = () => {
-	const btnDeleteProduct = document.querySelectorAll('#item-products button')
-	
-	btnDeleteProduct.forEach(btnDelete => {
-		btnDelete.addEventListener('click', () =>{
-			listProductsNew.innerHTML = ''
-			const product = products.filter(product => product.id != parseInt(btnDelete.id))
-			products = [...product]
-			listProductNew()
-		})
-	})
-}
+	const btnDeleteProduct = document.querySelectorAll('#item-products button');
+
+	btnDeleteProduct.forEach((btnDelete) => {
+		btnDelete.addEventListener('click', () => {
+			listProductsNew.innerHTML = '';
+			const product = products.filter((product) => product.id != parseInt(btnDelete.id));
+			products = [...product];
+			listProductNew();
+		});
+	});
+};
 
 // abrir modal de clientes
-btnModalClientes.addEventListener('click', () =>{
-	// cargar lista de productos 
-	listProducts.innerHTML = ''
-	listProduct()
+btnModalClientes.addEventListener('click', () => {
+	// cargar lista de productos
+	listProducts.innerHTML = '';
+	listProduct();
 	// agregar productos a los clientes
 	addProductPeople();
 	// acción para agregar personas
 	btnSaveClient.addEventListener('click', saveClient);
-})
+});
 
 // abrir modal productos
-btnModalProductos.addEventListener('click', () =>{
-	listProductsNew.innerHTML = ''
+btnModalProductos.addEventListener('click', () => {
+	listProductsNew.innerHTML = '';
 	// listar productos
 	listProductNew();
 	// acción para guardar productos
-	btnSaveProduct.addEventListener('click', saveProduct)
-})
-
+	btnSaveProduct.addEventListener('click', saveProduct);
+});
 
 listClients();
-
-
-
 
 /*
 	-eliminar clientes
@@ -232,8 +227,3 @@ listClients();
 	-modificar diseño
 	-refactorizar
 */
-
-
-
-
-

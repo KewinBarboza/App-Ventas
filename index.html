@@ -19,7 +19,7 @@
 	<body>
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<div class="container">
-				<!-- <a class="navbar-brand" href="#"><img src="./assets/image/logo-galleta-small.png" height="40" alt="" /> CooKies</a> -->
+				<a class="navbar-brand" href="#"><img src="./assets/image/logo-galleta-small.png" height="40" alt="" /> CooKies</a>
 				<button
 					class="navbar-toggler"
 					type="button"
@@ -95,21 +95,19 @@
 								/>
 								<rect x="0" y="0" width="24" height="24" fill="rgba(0, 0, 0, 0)" />
 							</svg>
-							<a class="nav-link active" href="#">
-								Buscar
-							</a>
+							<a class="nav-link active" href="#"> Buscar </a>
 						</li>
 					</ul>
 				</div>
 			</div>
 		</nav>
 
-		<div class="text-center w-100">
-			<!-- <img src="./assets/image/logo-galleta.png" class="mt-4" height="150" alt="" /> -->
+		<div class="text-center bg-light content-logo my-4">
+			<img src="./assets/image/logo-galleta.png" height="115" alt="" />
 		</div>
 
-		<div class="container px-0 px-md-3">
-			<table class="table table-borderless bg-white table-list" aria-describedby="list">
+		<div class="container px-0 px-md-3 mt-0">
+			<table class="table table-borderless bg-white table-list mt-0" aria-describedby="list">
 				<thead>
 					<tr>
 						<th id="name">Nombre</th>
@@ -235,7 +233,7 @@
 								<input type="text" id="price-product" class="form-control" placeholder="Precio del producto" />
 							</div>
 						</div>
-						
+
 						<ul class="list-group list-group-flush mt-3" id="list-product"></ul>
 					</div>
 					<div class="modal-footer">
@@ -257,12 +255,12 @@
 				</div>
 			</div>
 		</template>
-		
+
 		<!-- templete lista de  clientes -->
 		<template id="templete-client">
 			<tr>
 				<td id="name">Alvin</td>
-				<td id="products" >a</td>
+				<td id="products">a</td>
 				<td id="price">$0.87</td>
 				<td class="d-flex justify-content-end" id="action">
 					<a href="" class="mx-2 btn-edit" data-toggle="modal" data-target="#editPeople">
@@ -310,7 +308,7 @@
 		<!-- templete de lista de productos -->
 		<template id="templete-list-product">
 			<li class="list-group-item d-flex justify-content-between align-items-center" id="item-products">
-				<p class="mb-0 w-25">Cras justo odio </p>
+				<p class="mb-0 w-25">Cras justo odio</p>
 				<span></span>
 				<button type="button" class="close text-danger">
 					<span aria-hidden="true">&times;</span>
