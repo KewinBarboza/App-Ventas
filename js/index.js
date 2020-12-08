@@ -1,4 +1,5 @@
 const nameClient = document.getElementById('namePeople');
+const nameClientEdit = document.getElementById('name-client-edit');
 const nameProduct = document.getElementById('name-product');
 const priceProduct = document.getElementById('price-product');
 const btnSaveClient = document.getElementById('btnSavePeople');
@@ -6,7 +7,9 @@ const btnSaveProduct = document.getElementById('save-product');
 const btnModalClientes = document.getElementById('modal-clientes');
 const btnModalProductos = document.getElementById('modal-productos');
 const btnModalDeleteClient = document.getElementById('btn-delete-client');
+const btnModalEditClient = document.getElementById('btn-edit-client');
 const listProducts = document.getElementById('listProducts');
+const listProductsEdit = document.getElementById('list-products-edit');
 const listClient = document.getElementById('list-client');
 const listProductsNew = document.getElementById('list-product');
 
@@ -79,27 +82,39 @@ function saveClient(e) {
 	limpiarModal('addPeople');
 }
 
-// eliminar clientes
-function selectDeleteClient() {
-	const btnDeleteClient = document.querySelectorAll('#action .btn-delete');
+// seleccionar cliente a eliminar
+function selectClient(btn) {
+	const btnDeleteClient = document.querySelectorAll(`#action .${btn}`);
 	btnDeleteClient.forEach((btn) => {
 		btn.addEventListener('click', () => {
 			deleteClient(btn.id);
-			console.log(btn.id);
+			editClient(btn.id);
 		});
 	});
 }
 
+// eliminar clientes
 function deleteClient(id) {
 	btnModalDeleteClient.addEventListener('click', () => {
-		console.log(id);
 		const d = clients.filter((client) => client.id !== id);
 		clients = [...d];
 		listClient.innerHTML = '';
-		console.log(clients);
 		$('#deletePeople').modal('hide');
-		listClients();
+		listClients(listProducts);
 	});
+}
+
+// editar clientes
+function editClient(id){
+	const selectClient = clients.filter(client => client.id == id)
+	selectClient[0].products.forEach(product => {
+		console.log(product)
+	})
+	nameClientEdit.value = selectClient[0].name
+	listProduct(listProductsEdit)
+	btnModalEditClient.addEventListener('click', () => {
+		console.log('click', id)
+	})
 }
 
 // guardar productos
@@ -121,7 +136,7 @@ function limpiarModal(nameModal) {
 }
 
 // listar productos en el modal de agregar personas
-const listProduct = () => {
+const listProduct = (idContent) => {
 	const templete = document.getElementById('templeteListProducts').content;
 	const fragment = document.createDocumentFragment();
 
@@ -134,7 +149,7 @@ const listProduct = () => {
 		fragment.appendChild(clone);
 	}
 
-	listProducts.appendChild(fragment);
+	idContent.appendChild(fragment);
 };
 
 // listar clientes
@@ -145,6 +160,7 @@ const listClients = () => {
 	for (const client of clients) {
 		templete.getElementById('name').textContent = client.name;
 		templete.querySelector('.btn-delete').setAttribute('id', client.id);
+		templete.querySelector('.btn-edit').setAttribute('id', client.id);
 		const productsTemplete = templete.getElementById('products');
 		const price = templete.getElementById('price');
 
@@ -163,7 +179,8 @@ const listClients = () => {
 	}
 
 	listClient.appendChild(fragment);
-	selectDeleteClient();
+	selectClient('btn-delete');
+	selectClient('btn-edit');
 };
 
 // listar productos nuevos
@@ -201,7 +218,7 @@ const deleteProduct = () => {
 btnModalClientes.addEventListener('click', () => {
 	// cargar lista de productos
 	listProducts.innerHTML = '';
-	listProduct();
+	listProduct(listProducts);
 	// agregar productos a los clientes
 	addProductPeople();
 	// acción para agregar personas
@@ -217,10 +234,13 @@ btnModalProductos.addEventListener('click', () => {
 	btnSaveProduct.addEventListener('click', saveProduct);
 });
 
+// cargar datos de la persona a editar
+// document.getElementById('btn-edit').addEventListener('click')
+// btnModalEditClient.addEventListener('click', () => { console.log('hola') })
+
 listClients();
 
 /*
-	-eliminar clientes
 	-editar clientes
 	-buscar clientes
 	-guardar en el localStorage

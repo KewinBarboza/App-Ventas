@@ -19,7 +19,7 @@
 	<body>
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<div class="container">
-				<a class="navbar-brand" href="#"><img src="./assets/image/logo-galleta-small.png" height="40" alt="" /> CooKies</a>
+				<!-- <a class="navbar-brand" href="#"><img src="./assets/image/logo-galleta-small.png" height="40" alt="" /> CooKies</a> -->
 				<button
 					class="navbar-toggler"
 					type="button"
@@ -103,7 +103,7 @@
 		</nav>
 
 		<div class="text-center bg-light content-logo my-4">
-			<img src="./assets/image/logo-galleta.png" height="115" alt="" />
+			<!-- <img src="./assets/image/logo-galleta.png" height="115" alt="" /> -->
 		</div>
 
 		<div class="container px-0 px-md-3 mt-0">
@@ -159,33 +159,14 @@
 						<form>
 							<div class="form-group">
 								<label for="formGroupExampleInput">Nombre</label>
-								<input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input" />
+								<input type="text" class="form-control" id="name-client-edit" />
 							</div>
-							<div class="row px-3">
-								<div class="col-md-5 card p-2 m-1">
-									<div class="form-check form-check-inline">
-										<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" />
-										<label class="form-check-label" for="inlineCheckbox1">Galletas - <span>100 Bs</span></label>
-									</div>
-								</div>
-								<div class="col-md-5 card p-2 m-1">
-									<div class="form-check form-check-inline">
-										<input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" />
-										<label class="form-check-label" for="inlineCheckbox2">Tortas - 100 Bs</label>
-									</div>
-								</div>
-								<div class="col-md-5 card p-2 m-1">
-									<div class="form-check form-check-inline">
-										<input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3" />
-										<label class="form-check-label" for="inlineCheckbox3">Pan - 100 Bs</label>
-									</div>
-								</div>
-							</div>
+							<div class="row px-3" id="list-products-edit"></div>
 						</form>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-						<button type="button" class="btn btn-success">modificar</button>
+						<button type="button" class="btn btn-success" id="btn-edit-client">modificar</button>
 					</div>
 				</div>
 			</div>
